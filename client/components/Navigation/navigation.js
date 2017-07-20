@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Route, Link} from 'react-router-dom'
 import Home from '../pages/home'
 import About from '../pages/about'
 import Contact from '../pages/contact'
+import Info from '../pages/info'
 import Register from '../pages/register'
 
 class Menu extends Component{
@@ -16,7 +17,7 @@ class Menu extends Component{
     return(
         <Router>
           <div>
-            <Navbar inverse>
+            <Navbar collapseOnSelect inverse>
             <Navbar.Header>
               <Navbar.Brand>
                 <Link to="/">SaluD/Os</Link>
@@ -25,6 +26,7 @@ class Menu extends Component{
             </Navbar.Header>
             <Navbar.Collapse>
               <Nav>
+
               <LinkContainer to="/about" >
                   <NavItem eventKey={1} href="/about" >About</NavItem>
               </LinkContainer>
@@ -38,13 +40,18 @@ class Menu extends Component{
               <LinkContainer to='/register' >
                 <NavItem eventKey={3} href="/register">Register</NavItem>
               </LinkContainer>
+
+              <LinkContainer to="/info" >
+                  <NavItem eventKey={4} href="/about" >Info</NavItem>
+              </LinkContainer>
               </Nav>
 
             </Navbar.Collapse>
           </Navbar>
           <Route exact path='/' component={Home} />
+          <Route path='/info' component={Info} />
           <Route path='/about' component={About} />
-            <Route path='/contact' component={Contact} />
+                    <Route path='/contact' component={Contact} />
           <Route path='/register' component={Register} />
           </div>
         </Router>

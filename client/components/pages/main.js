@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Menu from '../Navigation/navigation'
 
+import '../../../styles/mainStyles.css'
+
 import { Grid, Row, Col,Thumbnail, Button, Media} from 'react-bootstrap'
 
 

@@ -3,7 +3,7 @@ const webpack = require('webpack');
 
 module.exports = {
   entry: [
-    'webpack-hot-middleware/client?reload=true',
+    'webpack-hot-middleware/client?reload=true&quiet=true',
     path.join(__dirname, 'client', 'index.js')
   ],
   output: {
@@ -32,6 +32,14 @@ module.exports = {
             loader: 'url-loader', options: {limit: 100000}
           }
         ]
+      },
+      {
+        test: /\.css$/,
+        loaders: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.scss$/,
+        loaders: ['style-loader', 'css-loader', 'sass-loader']
       }
     ]
   },

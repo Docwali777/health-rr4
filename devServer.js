@@ -1,6 +1,7 @@
 
 const express = require('express');
 const path = require('path');
+const PORT = process.env.PORT || 3000
 
 const app = express()
 
@@ -15,26 +16,22 @@ const middleware = webpackMiddleware(compiler, {
   publicPath: config.output.publicPath,
   contentBase: 'client',
   noInfo: true,
-  hot: true,
-  stats: {
+    stats: {
     colors: true,
     progress: true,
     chunkModules: false
   }
 })
 
-if(process.env.NODE_ENV === undefined){
   app.use(middleware)
   app.use(webpackHotMiddleware(compiler))
-}
 
 app.use(express.static('public'))
-
 
 app.get('/*', (req, res)=>{
   res.sendFile(path.resolve(__dirname, 'public', 'index.html'))
 })
-app.listen(3000, ()=>{
+app.listen(PORT, ()=>{
   console.log('server running');
 })
 console.log(process.env.NODE_ENV === undefined);
