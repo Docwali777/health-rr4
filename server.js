@@ -26,7 +26,7 @@ app.use(middleware)
 app.use(webpackHotMiddleware(compiler))
 
 app.use(express.static('public'))
-app.use
+
 
 app.get('/*', (req, res)=>{
   const filePath = path.resolve(path.join(__dirname, 'public/index.html'))

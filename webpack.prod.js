@@ -5,8 +5,9 @@ module.exports = {
   entry: './client/index.js',
   output: {
     filename: 'bundle.js',
-    path: path.join(__dirname, 'public')
+    path: path.resolve(__dirname, 'public')
   },
+  watch: true,
   module: {
     rules: [
       {
@@ -40,8 +41,8 @@ sourceMap: false,
 mangle: true,
 minimize: true
 }),
-    new webpack.DefinePlugin({
+new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
     })
-  ]
+]
 }
