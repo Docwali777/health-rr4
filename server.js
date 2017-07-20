@@ -1,7 +1,33 @@
+
 const express = require('express');
-const app = express()
 const path = require('path');
 const PORT = process.env.PORT || 3000
+
+const app = express()
+
+const webpack = require('webpack')
+const webpackMiddleware = require('webpack-dev-middleware')
+const webpackHotMiddleware = require('webpack-hot-middleware')
+const config = require('./webpack.dev.js')
+
+const compiler = webpack(config)
+
+const middleware = webpackMiddleware(compiler, {
+  publicPath: config.output.publicPath,
+  contentBase: 'client',
+  noInfo: true,
+  hot: true,
+  stats: {
+    colors: true,
+    progress: true,
+    chunkModules: true
+  }
+})
+
+if(process.env.NODE_ENV === undefined){
+  app.use(middleware)
+  app.use(webpackHotMiddleware(compiler))
+}
 
 app.use(express.static('public'))
 

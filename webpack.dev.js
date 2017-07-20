@@ -3,15 +3,15 @@ const webpack = require('webpack');
 
 module.exports = {
   entry: [
-      'webpack-hot-middleware/client?reload=true',
+    'webpack-hot-middleware/client?reload=true',
     path.join(__dirname, 'client', 'index.js')
   ],
-  watch: true,
   output: {
     filename: 'bundle.js',
     path: path.join(__dirname, 'public'),
     publicPath: '/'
   },
+    watch: true,
   module: {
     rules: [
       {
@@ -38,6 +38,7 @@ module.exports = {
   plugins: [
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin()
   ]
 }
