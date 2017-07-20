@@ -17,7 +17,7 @@ const middleware = webpackMiddleware(compiler, {
   noInfo: true,
   stats: {
     colors: true,
-  //   progress: true,
+    progress: true,
     chunkModules: false
   }
 })
