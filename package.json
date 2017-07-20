@@ -23,6 +23,7 @@
   },
   "scripts": {
     "webpack": "webpack --env=dev ",
-    "build": "webpack --env=prod --progress --profile --colors "
+    "build": "webpack --env=prod --progress --profile --colors ",
+    "start": "node server.js"
   }
 }
