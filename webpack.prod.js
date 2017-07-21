@@ -73,8 +73,7 @@ module.exports = {
       algorithm: "gzip",
       test: /\.js$|\.css$|\.html$/,
       threshold: 7000,
-      minRatio: 0.8,
-      deleteOriginalAssets: true
+      minRatio: 0.8
     }),
     new ExtractTextPlugin("styles.css"),
     new webpack.NoEmitOnErrorsPlugin(),
