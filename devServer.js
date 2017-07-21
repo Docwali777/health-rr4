@@ -26,6 +26,7 @@ const middleware = webpackMiddleware(compiler, {
   app.use(middleware)
   app.use(webpackHotMiddleware(compiler))
 
+
 app.use(express.static('public'))
 
 

@@ -11,7 +11,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const VENDOR_LIBS = ['react', 'react-dom', 'react-bootstrap', 'react-router-dom', 'react-router', 'react-router-bootstrap']
 
 module.exports = {
-  devtool: 'cheap-module-source-map',
+  devtool: 'source-map',
   cache: false,
   entry: {
     bundle: './client/index.js',
@@ -74,7 +74,7 @@ module.exports = {
       test: /\.js$|\.css$|\.html$/,
       threshold: 7000,
       minRatio: 0.8,
-      verbose: false
+      deleteOriginalAssets: true
     }),
     new ExtractTextPlugin("styles.css"),
     new webpack.NoEmitOnErrorsPlugin(),
@@ -89,17 +89,19 @@ compress: {
   screw_ie8: true
   },
 comments: false,
-sourceMap: false,
+sourceMap: true,
 mangle: true,
-minimize: true,
-  exclude: [/\.min\.js$/gi] // skip pre-minified libs
+minimize: false,
+  exclude: [/\.min\.js$/gi], // skip pre-minified libs,
+  verbose: false
 }),
 new CleanWebpackPlugin(['public'],{
 verbose: true,
 dry: false
 }),
 new webpack.optimize.CommonsChunkPlugin({
-name: ['vendor', 'manifest']
+name: ['vendor', 'manifest'],
+minChunks: 3
 }),
 new HtmlWebpackPlugin({
   title: 'Health',
@@ -109,6 +111,15 @@ new HtmlWebpackPlugin({
 new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
-      new BundleAnalyzerPlugin()
+
+      new BundleAnalyzerPlugin(),
+      new webpack.optimize.AggressiveMergingPlugin({
+        options: {
+          minSizeReduce: 1.5
+        }
+      }),
+      new webpack.optimize.MinChunkSizePlugin({
+  minChunkSize: 10000 // Minimum number of characters
+})
 ]
 }
