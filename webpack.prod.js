@@ -8,7 +8,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-const VENDOR_LIBS = ['react', 'react-dom', 'react-bootstrap', 'react-router-dom', 'react-router', 'react-router-bootstrap']
+const VENDOR_LIBS = ['react', 'react-dom', 'react-bootstrap', 'react-router-dom', 'react-router-bootstrap']
 
 module.exports = {
   devtool: 'cheap-module-source-map',
@@ -28,7 +28,8 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        exclude: /node_modules/,
+        // exclude: /node_modules/,
+        include: [ path.join(__dirname, './client') ],
         loader: 'babel-loader',
         query: {
           presets: ['es2015', 'react', 'stage-1']
@@ -68,13 +69,13 @@ module.exports = {
     minimize: true,
     debug: false
   }),
-  new CompressionPlugin({
-      asset: "[path].gz[query]",
-      algorithm: "gzip",
-      test: /\.js$|\.css$|\.html$/,
-      threshold: 10240,
-     minRatio: 0.8
-    }),
+  // new CompressionPlugin({
+  //     asset: "[path].gz[query]",
+  //     algorithm: "gzip",
+  //     test: /\.js$|\.css$|\.html$/,
+  //     threshold: 10240,
+  //    minRatio: 0.8
+  //   }),
     new ExtractTextPlugin("styles.css"),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
@@ -83,29 +84,33 @@ module.exports = {
 compress: {
   warnings: false,
   pure_getters: true,
-  unsafe: true,
+  unsafe: false,
   unsafe_comps: true,
   screw_ie8: true
   },
 comments: false,
 sourceMap: true,
 mangle: true,
-minimize: false,
-  exclude: [/\.min\.js$/gi], // skip pre-minified libs,
-  verbose: false
+minimize: false
 }),
 new CleanWebpackPlugin(['public'],{
 verbose: false,
 dry: false
 }),
 new webpack.optimize.CommonsChunkPlugin({
-name: ['vendor', 'manifest'],
-minChunks: 3
+name: ['vendor', 'manifest']
 }),
 new HtmlWebpackPlugin({
   title: 'Health',
   filename: 'index.html',
-  template: 'client/index.html'
+  template: 'client/index.html',
+  minify: {
+    collapseWhitespace: true,
+    collapseInlineTagWhitespace: true,
+    minifyCSS: true,
+    minifyJS: true,
+    removeOptionalTags: true
+  }
 }),
 new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
