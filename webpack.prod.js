@@ -11,7 +11,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const VENDOR_LIBS = ['react', 'react-dom', 'react-bootstrap', 'react-router-dom', 'react-router', 'react-router-bootstrap']
 
 module.exports = {
-  devtool: 'source-map',
+  devtool: 'cheap-module-source-map',
   cache: false,
   entry: {
     bundle: './client/index.js',
