@@ -1,11 +1,12 @@
 const path = require('path');
 const webpack = require('webpack');
-
-var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+// var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+//
 module.exports = {
   entry: [
-    'webpack-hot-middleware/client?reload=true&quiet=true',
+    'webpack-hot-middleware/client?reload=true&quiet=false',
     path.join(__dirname, 'client', 'index.js')
   ],
   output: {
@@ -46,10 +47,14 @@ module.exports = {
     ]
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      title: 'Health',
+      filename: 'index.html',
+      template: 'client/index.html'
+    }),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new BundleAnalyzerPlugin()
+    new webpack.HotModuleReplacementPlugin()
   ]
 }

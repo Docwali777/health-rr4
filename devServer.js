@@ -15,18 +15,19 @@ const compiler = webpack(config)
 const middleware = webpackMiddleware(compiler, {
   publicPath: config.output.publicPath,
   contentBase: 'client',
-  noInfo: true,
-    stats: {
-    colors: true,
-    progress: true,
-    chunkModules: false
-  }
+  noInfo: true
+  // ,  stats: {
+  //   colors: true,
+  //   progress: true,
+  //   chunkModules: false
+  // }
 })
 
   app.use(middleware)
   app.use(webpackHotMiddleware(compiler))
 
 app.use(express.static('public'))
+
 
 app.get('/*', (req, res)=>{
   res.sendFile(path.resolve(__dirname, 'public', 'index.html'))

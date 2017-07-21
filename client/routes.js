@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
-import { Router, Route, IndexRoute, browserHistory} from 'react-router'
+import { BrowserRouter as Router, Route, IndexRoute, browserHistory} from 'react-router-dom'
 
 
 import Main from './components/pages/main'
@@ -13,13 +13,7 @@ import Info from './components/pages/info'
 
 const Routes = (
   <Router history={browserHistory}>
-    <Route path='/' component={Main}>
-      <IndexRoute component={Home} />
-          <Route path='/info' component={Info} />
-        <Route path='/about' component={About} />
-        <Route path='/contact' component={Contact} />
-        <Route path='/register' component={Register} />
-    </Route>
+  <Main />
   </Router>
 )
 

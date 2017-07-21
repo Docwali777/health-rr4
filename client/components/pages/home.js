@@ -11,7 +11,7 @@ class Home extends Component{
     return(
       <div className='container'>
         <div className='text-center'>
-          <h1 > to SaluD/Os </h1>
+          <h1 > SaluD/Os </h1>
           <h3>Empowering Individuals Through Knowledge</h3>
         </div>
         <hr />
