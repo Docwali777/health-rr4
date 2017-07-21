@@ -72,8 +72,8 @@ module.exports = {
       asset: "[path].gz[query]",
       algorithm: "gzip",
       test: /\.js$|\.css$|\.html$/,
-      threshold: 7000,
-      minRatio: 0.8
+      threshold: 10240,
+     minRatio: 0.8
     }),
     new ExtractTextPlugin("styles.css"),
     new webpack.NoEmitOnErrorsPlugin(),
@@ -95,7 +95,7 @@ minimize: false,
   verbose: false
 }),
 new CleanWebpackPlugin(['public'],{
-verbose: true,
+verbose: false,
 dry: false
 }),
 new webpack.optimize.CommonsChunkPlugin({
@@ -112,13 +112,16 @@ new webpack.DefinePlugin({
     }),
 
       new BundleAnalyzerPlugin(),
-      new webpack.optimize.AggressiveMergingPlugin({
-        options: {
-          minSizeReduce: 1.5
-        }
-      }),
+      new webpack.optimize.AggressiveMergingPlugin(),
       new webpack.optimize.MinChunkSizePlugin({
   minChunkSize: 10000 // Minimum number of characters
 })
-]
+],
+resolve: {
+  extensions: ['.js', '.jsx'],
+  "alias": {
+    "react": "preact-compat",
+    "react-dom": "preact-compat"
+  }
+}
 }
