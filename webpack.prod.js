@@ -66,9 +66,8 @@ module.exports = {
       asset: "[path].gz[query]",
       algorithm: "gzip",
       test: /\.js$|\.css$|\.html$/,
-      threshold: 10240,
+      threshold: 7000,
       minRatio: 0.8,
-      deleteOriginalAssets: true,
       verbose: false
     }),
     new ExtractTextPlugin("styles.css"),
