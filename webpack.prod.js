@@ -12,7 +12,7 @@ const VENDOR_LIBS = ['react', 'react-dom', 'react-bootstrap', 'react-router-dom'
 
 module.exports = {
   devtool: 'cheap-module-source-map',
-  cache: false,
+  cache: true,
   entry: {
     bundle: './client/index.js',
     vendor: VENDOR_LIBS
@@ -32,6 +32,7 @@ module.exports = {
         include: [ path.join(__dirname, './client') ],
         loader: 'babel-loader',
         query: {
+          cacheDirectory: true,
           presets: ['es2015', 'react', 'stage-1']
         }
       },
@@ -115,18 +116,9 @@ new HtmlWebpackPlugin({
 new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
-
-      new BundleAnalyzerPlugin(),
       new webpack.optimize.AggressiveMergingPlugin(),
       new webpack.optimize.MinChunkSizePlugin({
   minChunkSize: 10000 // Minimum number of characters
 })
-],
-resolve: {
-  extensions: ['.js', '.jsx'],
-  "alias": {
-    "react": "preact-compat",
-    "react-dom": "preact-compat"
-  }
-}
+]
 }
